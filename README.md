@@ -161,5 +161,4 @@ The website was tested by:
 
 ## Repository
 
-GitHub:
-[your repository link]
+GitHub: [boutique_ado_v1](https://github.com/Krisztina-sketch/boutique_ado_v1)
