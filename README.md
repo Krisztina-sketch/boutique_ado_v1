@@ -150,15 +150,52 @@ python manage.py runserver
 - Programming language: Python
 - Database: SQLite
 
+
 ## Testing
 
-The website was tested by:
-- Checking all pages load correctly
-- Testing product display
-- Testing Django admin product creation
-- Checking images display correctly
-- Testing different screen sizes
+The website was tested throughout development to make sure the main features work correctly.
 
+### Navigation
+
+- Checked that the Home link works correctly.
+- Checked that the Products link opens the product catalogue.
+- Checked that the Add Product link opens the product management form for an authorised user.
+- Checked that Sign In and Sign Out work correctly.
+
+### Product Display
+
+- Checked that products stored in the database appear on the Products page.
+- Checked that product names, descriptions, prices and images display correctly.
+- Checked that the View Product button opens the correct product detail page.
+- Checked that products can be filtered using the category buttons.
+
+### Product Management
+
+The CRUD functionality was manually tested.
+
+- **Create:** Added new products using the Add Product form and confirmed that they appeared on the Products page.
+- **Read:** Checked that products can be viewed on the Products page and individual product detail pages.
+- **Update:** Edited an existing product and confirmed that the updated information appeared correctly.
+- **Delete:** Deleted a product and confirmed that it was removed from the product catalogue.
+
+### Authentication
+
+- Tested user sign in.
+- Tested user sign out.
+- Checked that navigation changes depending on whether the user is authenticated.
+- Checked access to product management functionality.
+
+### Django Admin
+
+The Django administration panel was used to check and manage database records, users, email addresses, products and categories.
+
+### Images
+
+Product images were checked to make sure that they display correctly with the appropriate products.
+
+### Responsive Design
+
+The website was tested at different screen sizes to check that the layout remains usable and readable.
 ## Repository
 
 GitHub: [boutique_ado_v1](https://github.com/Krisztina-sketch/boutique_ado_v1)
