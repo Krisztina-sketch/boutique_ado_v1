@@ -199,3 +199,87 @@ The website was tested at different screen sizes to check that the layout remain
 ## Repository
 
 GitHub: [boutique_ado_v1](https://github.com/Krisztina-sketch/boutique_ado_v1)
+
+## User Authentication
+
+The website includes user authentication using Django's built-in authentication system.
+
+Users can:
+
+- Create an account
+- Sign in
+- Sign out
+- Access features according to their authentication status
+
+Product management functionality is restricted so that unauthorised users cannot modify products.
+
+## Product Management
+
+Authorised users can manage products directly through the website.
+
+The following CRUD functionality has been implemented:
+
+- Create new products
+- Read and view product information
+- Update existing products
+- Delete products
+
+Product forms allow information such as the product name, description, price, category and image to be managed.
+
+Confirmation is required before a product is deleted.
+
+## Responsive Design
+
+The website was designed to work across different screen sizes.
+
+Bootstrap and custom CSS were used to create a responsive layout. The navigation, product catalogue and product detail pages adapt to different screen sizes.
+
+## Known Issues
+
+At the time of development, no major known issues prevent the core functionality of the website from working.
+
+Further improvements could include:
+
+- Improved product filtering and searching
+- Additional user profile functionality
+- Shopping basket and checkout functionality
+- Improved image storage for production deployment
+
+## Deployment
+
+The project is prepared for deployment to Heroku.
+
+Deployment requirements include:
+
+- `requirements.txt` containing the Python dependencies
+- `Procfile` containing the Gunicorn web process
+- Gunicorn as the production web server
+
+The Procfile contains:
+
+`web: gunicorn boutique_ado.wsgi`
+
+The final deployed application URL will be added here after deployment.
+
+## Version Control
+
+Git and GitHub were used for version control throughout development.
+
+Changes were committed regularly during development and pushed to the GitHub repository.
+
+Repository:
+
+[boutique_ado_v1](https://github.com/Krisztina-sketch/boutique_ado_v1)
+
+## Future Features
+
+Possible future improvements include:
+
+- Shopping basket functionality
+- Online checkout and payments
+- Product search
+- Product filtering
+- User profiles
+- Product reviews
+- Wishlist functionality
+- Improved product image management
