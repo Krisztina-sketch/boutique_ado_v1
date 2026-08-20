@@ -1,0 +1,49 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar-brand {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+}
+
+.card {
+    border: none;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-top {
+    height: 450px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+}
+
+.card-text {
+    color: #6c757d;
+}
+
+h1 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.mb-4 .btn {
+    margin-right: 0.4rem;
+    margin-bottom: 0.4rem;
+}

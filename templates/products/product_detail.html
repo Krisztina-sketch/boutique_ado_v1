@@ -6,20 +6,35 @@
     <div class="row">
 
         <div class="col-md-6">
-            <img src="{{ product.image.url }}" 
-                 class="img-fluid" 
+            <img src="{{ product.image.url }}"
+                 class="img-fluid"
                  alt="{{ product.name }}">
         </div>
 
         <div class="col-md-6">
             <h1>{{ product.name }}</h1>
 
+            {% if product.category %}
+                <p><strong>Category:</strong> {{ product.category.name }}</p>
+            {% endif %}
+
             <p>{{ product.description }}</p>
 
             <h3>£{{ product.price }}</h3>
-            <a href="{% url 'products' %}" class="btn btn-dark mt-4">
-    Back to Products
 
+            <a href="{% url 'products' %}" class="btn btn-dark mt-4">
+                Back to Products
+            </a>
+{% if user.is_authenticated %}
+            <a href="{% url 'edit_product' product.id %}" class="btn btn-warning mt-4">
+                Edit Product
+            </a>
+        
+
+            <a href="{% url 'delete_product' product.id %}" class="btn btn-danger mt-4">
+                Delete Product
+            </a>
+            {% endif %}
         </div>
 
     </div>
