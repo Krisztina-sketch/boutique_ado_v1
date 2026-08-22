@@ -2,8 +2,7 @@
 
 ## Introduction
 
-Boutique Ado is an e-commerce website built with Django. The project allows users to browse products and view product details. Products are managed through the Django administration panel.
-
+Boutique Ado is an e-commerce website built with Django. The project allows users to browse products and view product details. “Products can be managed through the website by authorised users, as well as through the Django administration panel.”
 This project was created as part of my Level 5 Web Application Development course.
 
 ## Features
@@ -35,8 +34,7 @@ The Product model contains:
 - Product price
 - Product image
 
-## Products
-Current products added:
+
 ## Products
 
 Current products added:
