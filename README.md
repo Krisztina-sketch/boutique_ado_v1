@@ -139,6 +139,10 @@ Product images were sourced from free image websites.
 
 All images are used for educational purposes as part of this student project.
 
+- Bootstrap: Used for responsive layout and interface components
+- django-allauth: Used for user registration and authentication
+External libraries and frameworks are used according to their respective documentation. Custom application logic, templates and styling were developed for this student project.
+
 ## Development Notes
 
 Products are created and managed through the Django administration interface.
