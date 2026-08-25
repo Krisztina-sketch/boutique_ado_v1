@@ -17,6 +17,12 @@ This project was created as part of my Level 5 Web Application Development cours
  -Create, read, update and delete (CRUD) product functionality
  -Restricted product management for authorised users
 
+## JavaScript
+
+Custom JavaScript is used to improve the user experience.
+
+A confirmation dialog is shown before a product is deleted. If the user cancels the confirmation, the delete request is stopped before the form is submitted.
+
 ## Technologies Used
 
 - HTML5
