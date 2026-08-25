@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Boutique Ado is an e-commerce website built with Django. The project allows users to browse products and view product details. “Products can be managed through the website by authorised users, as well as through the Django administration panel.”
+Boutique Ado is an e-commerce website built with Django. The project allows users to browse products and view product details. Products can be managed through the website by authorised users, as well as through the Django administration panel.
 This project was created as part of my Level 5 Web Application Development course.
 
 ## Features
@@ -12,6 +12,10 @@ This project was created as part of my Level 5 Web Application Development cours
 - Product detail pages
 - Django admin panel for managing products
 - Product images, descriptions and prices
+ -User registration and authentication
+ -Product category filtering
+ -Create, read, update and delete (CRUD) product functionality
+ -Restricted product management for authorised users
 
 ## Technologies Used
 
@@ -50,6 +54,24 @@ Current products added:
 - Floral Summer Dress
 - Blue Summer Dress
 
+### Category Model
+
+The Category model stores the categories used to organise products.
+
+It contains:
+
+- Category name
+
+### Database Relationship
+
+The Product and Category models have a one-to-many relationship.
+
+Each product can belong to one category, while each category can contain multiple products. This relationship is implemented using a Django ForeignKey in the Product model.
+
+If a category is deleted, the products belonging to that category are not deleted. Instead, their category value is set to NULL.
+
+This structure allows products to be organised and filtered by category.
+
 
 ## Image Credits
 
@@ -73,7 +95,7 @@ Product images were sourced from free image websites.
   Photographer : Arthouse Studio
   URL : https://www.pexels.com/photo/woman-in-a-dress-and-a-hat-carrying-a-shopping-basket-4589211/
 
-  Black Coctail Dress image :
+  Black Cocktail Dress image :
   Elegant black cocktail dress for evening events.
   Source : Pexels
   Photographer :helin öner
@@ -88,7 +110,7 @@ Product images were sourced from free image websites.
   Blue Casual Blouse image :
   Lightweight blouse for smart casual looks.
   Source : Pexels
-  Potographer : Mâide Arslan
+  Photographer : Mâide Arslan
   URL : https://www.pexels.com/photo/young-woman-in-a-blue-shirt-against-a-stone-wall-20636650/
 
   High Waist Denim Jeans image :
@@ -127,7 +149,7 @@ The administrator can add, edit and remove products without directly changing th
 
 Clone this repository:
 
-git clone [your GitHub link]
+git clone  https://github.com/Krisztina-sketch/boutique_ado_v1.git
 
 Install requirements:
 
@@ -152,6 +174,60 @@ python manage.py runserver
 ## Testing
 
 The website was tested throughout development to make sure the main features work correctly.
+
+## Bugs and Fixes
+
+Several issues were identified and resolved during development.
+
+### Django Allauth Configuration
+
+While configuring django-allauth, authentication settings and URL configuration needed to be adjusted so that sign in and sign out worked correctly.
+
+The issue was resolved by adding the required allauth applications, authentication backend, site configuration and account URLs.
+
+### Product CRUD Indentation Errors
+
+During development of the add, edit and delete product views, Python indentation errors occurred.
+
+These were resolved by correcting the indentation of the view functions and checking the application using:
+
+`python manage.py check`
+
+After the fixes, Django reported:
+
+`System check identified no issues (0 silenced).`
+
+### Static CSS File Not Found
+
+The custom stylesheet initially returned a 404 error because the static file structure was not configured correctly.
+
+The issue was resolved by creating the correct static directory structure and loading the stylesheet using Django's static template tag.
+
+After the fix, the stylesheet loaded successfully with a 200 response.
+
+### Authentication and Product Management
+
+Initially, product management pages were accessible without appropriate navigation restrictions.
+
+This was improved by using `@login_required` on the add, edit and delete product views and by conditionally displaying management links based on authentication status.
+
+### Duplicate Test Products
+
+Temporary products were created while testing CRUD functionality.
+
+These test products were later removed through Django Admin so that the final product catalogue contained only the intended products.
+
+### Secret Key Security
+
+The Django SECRET_KEY was initially stored directly in `settings.py`.
+
+This was corrected by moving the secret key to an environment variable so that it is not included directly in the repository.
+
+### Remaining Issues
+
+The application is still awaiting final Heroku deployment and live production testing.
+
+No major known local-development issues currently prevent the core functionality from working.
 
 ### Navigation
 
@@ -182,6 +258,18 @@ The CRUD functionality was manually tested.
 - Tested user sign out.
 - Checked that navigation changes depending on whether the user is authenticated.
 - Checked access to product management functionality.
+
+## Security
+
+Security considerations have been included throughout the development of Boutique Ado.
+
+- Django's authentication system is used for user registration, sign in and sign out.
+- Product management functionality requires authentication.
+- Django's CSRF protection is used on forms that modify data.
+- The Django SECRET_KEY is stored as an environment variable rather than being hard-coded in the repository.
+- DEBUG is configured through an environment variable and will be disabled in the production environment.
+- Environment variables are used to keep sensitive configuration information out of the GitHub repository.
+- Django's built-in password validation is used for user passwords.
 
 ### Django Admin
 
