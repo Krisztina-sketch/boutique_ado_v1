@@ -7,7 +7,7 @@
 
     <p>Are you sure you want to delete "{{ product.name }}"?</p>
 
-    <form method="POST">
+    <form method="POST" class="delete-product-form">
         {% csrf_token %}
 
         <button type="submit" class="btn btn-danger">
