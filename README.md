@@ -379,3 +379,49 @@ Possible future improvements include:
 - Product reviews
 - Wishlist functionality
 - Improved product image management
+
+## Wireframes
+
+Wireframes were created during the planning stage of Boutique Ado to establish the structure and layout of the main pages before development.
+
+The wireframes include:
+
+- Home page
+- Products page
+- Product detail page
+
+![Boutique Ado Wireframes](docs/products-page.png)
+
+The final application follows the core structure of these wireframes, although some design elements and functionality were adapted during development.
+
+## AI Assistance
+
+Generative AI tools, including ChatGPT by OpenAI, were used during development for guidance, troubleshooting, code explanation, debugging support and assistance with project documentation.
+
+AI was also used to assist with the creation of wireframe concepts for the Boutique Ado project. The generated material was reviewed and adapted for use within the project.
+
+All final implementation decisions, testing and project submission remain the responsibility of the developer.
+
+## Deployment
+
+The Boutique Ado application is deployed using Render.
+
+Live site:
+
+https://boutique-ado-v1-l5w5.onrender.com
+
+The project is connected to the GitHub repository and Render automatically deploys changes pushed to the main branch.
+
+### Deployment configuration
+
+- Runtime: Python 3.10.19
+- Build command:
+
+  `pip install -r requirements.txt && python manage.py collectstatic --noinput`
+
+- Start command:
+
+  `gunicorn boutique_ado.wsgi`
+
+- Static files are handled using WhiteNoise.
+- Environment variables are configured securely in Render.
