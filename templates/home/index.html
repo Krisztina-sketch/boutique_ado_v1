@@ -1,10 +1,124 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
-<div class="container mt-5">
-    <h1>Welcome to Boutique Ado</h1>
-    <p>My Django shop is working!</p>
-</div>
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-md-6">
+                <p class="hero-kicker">DISCOVER YOUR STYLE</p>
+
+                <h1 class="hero-title">
+                    Welcome to <span>Boutique Ado</span>
+                </h1>
+
+                <p class="hero-text">
+                    Trendy, timeless and thoughtfully selected pieces for every occasion.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="{% url 'products' %}" class="btn btn-boutique">
+                        Shop Now
+                    </a>
+
+                    <a href="{% url 'products' %}" class="btn btn-outline-boutique">
+                        View Collection
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="hero-image">
+                    <img src="{% static 'media/products/floral-summer-dress.jpg' %}"
+                         alt="Boutique fashion"
+                         class="img-fluid">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="features-strip">
+    <div class="container">
+        <div class="row text-center">
+
+            <div class="col-md-3">
+                <h5>Fast Delivery</h5>
+                <p>Quick and reliable shipping</p>
+            </div>
+
+            <div class="col-md-3">
+                <h5>High Quality</h5>
+                <p>Carefully selected products</p>
+            </div>
+
+            <div class="col-md-3">
+                <h5>Secure Shopping</h5>
+                <p>Shop with confidence</p>
+            </div>
+
+            <div class="col-md-3">
+                <h5>Customer Support</h5>
+                <p>We're here to help</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="featured-section">
+    <div class="container">
+
+        <h2 class="section-title">Featured Products</h2>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="featured-card">
+                    <img src="{% static 'media/products/blue-dress.jpg' %}"
+                         alt="Blue Summer Dress"
+                         class="img-fluid">
+                    <h5>Blue Summer Dress</h5>
+                    <p>£45.00</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="featured-card">
+                    <img src="{% static 'media/products/blue-casual-blouse.jpg' %}"
+                         alt="Blue Casual Blouse"
+                         class="img-fluid">
+                    <h5>Blue Casual Blouse</h5>
+                    <p>£45.00</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="featured-card">
+                    <img src="{% static 'media/products/leather-handbag.jpg' %}"
+                         alt="Leather Handbag"
+                         class="img-fluid">
+                    <h5>Leather Handbag</h5>
+                    <p>£55.00</p>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="featured-card">
+                    <img src="{% static 'media/products/floral-summer-dress.jpg' %}"
+                         alt="Floral Summer Dress"
+                         class="img-fluid">
+                    <h5>Floral Summer Dress</h5>
+                    <p>£45.00</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
 
 {% endblock %}
