@@ -149,12 +149,9 @@ All images are used for educational purposes as part of this student project.
 - django-allauth: Used for user registration and authentication
 External libraries and frameworks are used according to their respective documentation. Custom application logic, templates and styling were developed for this student project.
 
-## Development Notes
+Products can be created, viewed, updated and deleted through the website by authorised users.
 
-Products are created and managed through the Django administration interface.
-
-The administrator can add, edit and remove products without directly changing the database.
-
+The Django administration interface can also be used to manage products, categories and user data.
 ## Local Development
 
 Clone this repository:
@@ -341,21 +338,7 @@ Further improvements could include:
 - Shopping basket and checkout functionality
 - Improved image storage for production deployment
 
-## Deployment
 
-The project is prepared for deployment to Heroku.
-
-Deployment requirements include:
-
-- `requirements.txt` containing the Python dependencies
-- `Procfile` containing the Gunicorn web process
-- Gunicorn as the production web server
-
-The Procfile contains:
-
-`web: gunicorn boutique_ado.wsgi`
-
-The final deployed application URL will be added here after deployment.
 
 ## Version Control
 
@@ -390,9 +373,13 @@ The wireframes include:
 - Products page
 - Product detail page
 
-![Boutique Ado Wireframes](docs/products-page.png)
+![Boutique Ado Wireframes](docs/wireframes-project-3.png)
 
 The final application follows the core structure of these wireframes, although some design elements and functionality were adapted during development.
+## Wireframes
+
+Wireframes were created during the planning stage of Boutique Ado to establish the structure and layout of the main pages before development.
+
 
 ## AI Assistance
 
