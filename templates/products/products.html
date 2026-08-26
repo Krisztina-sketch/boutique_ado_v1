@@ -29,7 +29,7 @@
             <div class="card mb-4">
 
                 <a href="{% url 'product_detail' product.id %}">
-                    <img src="{{ product.image.url }}"
+                    <img src="{% static 'media/' %}{{ product.image.name }}"
                          class="card-img-top"
                          alt="{{ product.name }}">
                 </a>
