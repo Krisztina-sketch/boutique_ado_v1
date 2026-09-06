@@ -30,6 +30,7 @@ def product_detail(request, id):
 
     return render(request, 'products/product_detail.html', context)
 
+
 @login_required
 def add_product(request):
     if request.method == 'POST':
@@ -46,6 +47,7 @@ def add_product(request):
     }
 
     return render(request, 'products/add_product.html', context)
+
 
 @login_required
 def edit_product(request, id):
@@ -66,6 +68,7 @@ def edit_product(request, id):
     }
 
     return render(request, 'products/edit_product.html', context)
+
 
 @login_required
 def delete_product(request, id):
