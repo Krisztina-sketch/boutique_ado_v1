@@ -180,91 +180,191 @@ python manage.py runserver
 
 ## Testing
 
-The website was tested throughout development to make sure the main features work correctly.
+The application was tested manually throughout development and again on the live Render deployment.
 
-## Bugs and Fixes
+### Manual and Automated Testing
 
-Several issues were identified and resolved during development.
+Manual testing was used to check the application from a user's perspective, including registration, email verification, login, navigation, product display, category filtering and CRUD functionality.
 
-### Django Allauth Configuration
+Automated and validation tools were used to identify code and configuration problems. Python code was checked using `pycodestyle`, and Django configuration was checked using `python manage.py check`.
 
-While configuring django-allauth, authentication settings and URL configuration needed to be adjusted so that sign in and sign out worked correctly.
+Manual testing is useful for assessing usability, navigation, responsiveness and user interaction. Automated checks are useful for consistently identifying syntax, style and configuration issues.
 
-The issue was resolved by adding the required allauth applications, authentication backend, site configuration and account URLs.
+### Python PEP8 Validation
 
-### Product CRUD Indentation Errors
+Python files were validated using:
 
-During development of the add, edit and delete product views, Python indentation errors occurred.
+`python -m pycodestyle . --exclude=.venv,migrations,staticfiles`
 
-These were resolved by correcting the indentation of the view functions and checking the application using:
+Result:
+
+**No PEP8 errors or warnings were reported.**
+
+Django was also checked using:
 
 `python manage.py check`
 
-After the fixes, Django reported:
+Result:
 
 `System check identified no issues (0 silenced).`
 
-### Static CSS File Not Found
+### Authentication and Email Verification Testing
 
-The custom stylesheet initially returned a 404 error because the static file structure was not configured correctly.
+| Test | Expected Result | Actual Result | Status |
+| --- | --- | --- | --- |
+| Register a new user | Account is created | Account created successfully | Pass |
+| Submit registration email | Verification email is sent through Gmail SMTP | Verification email received successfully | Pass |
+| Confirm email address | Confirmation link activates account | Email confirmation completed successfully | Pass |
+| Sign in with verified account | User is authenticated | Login completed successfully | Pass |
+| Sign out | User session ends | User signed out successfully | Pass |
 
-The issue was resolved by creating the correct static directory structure and loading the stylesheet using Django's static template tag.
+Gmail SMTP is configured using environment variables stored securely on Render. The live service was upgraded from the free Render tier because the free tier blocks outbound SMTP connections.
 
-After the fix, the stylesheet loaded successfully with a 200 response.
+### Product and Database Testing
 
-### Authentication and Product Management
+The database-backed product functionality was tested on the live deployed application.
 
-Initially, product management pages were accessible without appropriate navigation restrictions.
+| CRUD Action | Test | Result |
+| --- | --- | --- |
+| Create | Added a temporary test product using the Add Product form | Product was stored and displayed successfully |
+| Read | Opened the product catalogue and product detail page | Product data displayed correctly |
+| Update | Changed the temporary product price from £19.99 to £24.99 | Updated value was saved and displayed |
+| Delete | Deleted the temporary test product | Product was removed successfully |
 
-This was improved by using `@login_required` on the add, edit and delete product views and by conditionally displaying management links based on authentication status.
+This confirmed that the database and CRUD functionality work through the deployed frontend.
 
-### Duplicate Test Products
+### Navigation and Product Display
 
-Temporary products were created while testing CRUD functionality.
+- Home page loads successfully.
+- Products page loads successfully.
+- Category filtering works.
+- Product detail pages open correctly.
+- Authentication links change according to login state.
+- Add Product is available to authenticated users.
+- Product names, descriptions and prices display correctly.
 
-These test products were later removed through Django Admin so that the final product catalogue contained only the intended products.
+### Static and Media Testing
 
-### Secret Key Security
+Static homepage images were reorganised into:
 
-The Django SECRET_KEY was initially stored directly in `settings.py`.
+`home/static/images/products/`
 
-This was corrected by moving the secret key to an environment variable so that it is not included directly in the repository.
+Django confirmed the static files could be found using `findstatic`.
 
-### Remaining Issues
+Uploaded product images use the `media/products/` directory.
 
-The application is still awaiting final Heroku deployment and live production testing.
+### Responsive and Usability Testing
 
-No major known local-development issues currently prevent the core functionality from working.
+The application was checked at different browser widths to confirm that navigation, product cards, forms and text remain readable and usable on mobile, tablet and desktop-sized screens.
 
-### Navigation
+### Development and Deployed Version Testing
 
-- Checked that the Home link works correctly.
-- Checked that the Products link opens the product catalogue.
-- Checked that the Add Product link opens the product management form for an authorised user.
-- Checked that Sign In and Sign Out work correctly.
+The application was tested locally and again on the live Render deployment.
 
-### Product Display
+The deployed version was checked for:
 
-- Checked that products stored in the database appear on the Products page.
-- Checked that product names, descriptions, prices and images display correctly.
-- Checked that the View Product button opens the correct product detail page.
-- Checked that products can be filtered using the category buttons.
+- user registration;
+- Gmail email verification;
+- login and logout;
+- product catalogue display;
+- category filtering;
+- CRUD operations;
+- static files;
+- database functionality.
 
-### Product Management
+The live deployment matched the expected development functionality.
 
-The CRUD functionality was manually tested.
+## Features and Screenshots
 
-- **Create:** Added new products using the Add Product form and confirmed that they appeared on the Products page.
-- **Read:** Checked that products can be viewed on the Products page and individual product detail pages.
-- **Update:** Edited an existing product and confirmed that the updated information appeared correctly.
-- **Delete:** Deleted a product and confirmed that it was removed from the product catalogue.
+### Homepage
 
-### Authentication
+The homepage introduces the Boutique ADO store and provides navigation to the main areas of the application.
 
-- Tested user sign in.
-- Tested user sign out.
-- Checked that navigation changes depending on whether the user is authenticated.
-- Checked access to product management functionality.
+Main features include:
+
+- responsive navigation;
+- product-category links;
+- featured product images;
+- links to the Products page;
+- authentication links depending on login state.
+
+
+### Products Page
+
+The Products page displays products stored in the database.
+
+Each product card includes:
+
+- product image;
+- product name;
+- price;
+- link to the product detail page.
+
+Products can also be filtered by category.
+
+![Products page](docs/products-page.png)
+
+### User Registration
+
+Users can create a new account using the django-allauth registration form.
+
+Registration requires:
+
+- username;
+- email address;
+- email confirmation;
+- password;
+- password confirmation.
+
+A verification email is sent after registration.
+
+
+### Email Verification
+
+New users receive a real verification email through Gmail SMTP.
+
+The confirmation link directs the user back to the deployed Boutique ADO site so the account email address can be verified.
+
+
+### Product Detail
+
+The product detail page displays information for an individual database record, including:
+
+- product name;
+- description;
+- price;
+- category;
+- image.
+
+Authenticated users can access Edit and Delete functionality where permitted.
+
+
+### Add Product
+
+The Add Product form allows an authenticated user to create a new product record.
+
+The form includes:
+
+- name;
+- description;
+- price;
+- category;
+- product image.
+
+
+### Edit Product
+
+Existing product information can be edited and saved to the database.
+
+During testing, a temporary product price was changed from £19.99 to £24.99 to verify the Update functionality.
+
+
+### Delete Product
+
+The Delete Product functionality allows a product record to be removed from the database.
+
+A temporary test product was successfully deleted during live CRUD testing.
+
 
 ## Security
 
@@ -376,11 +476,6 @@ The wireframes include:
 ![Boutique Ado Wireframes](docs/wireframes-project-3.png)
 
 The final application follows the core structure of these wireframes, although some design elements and functionality were adapted during development.
-## Wireframes
-
-Wireframes were created during the planning stage of Boutique Ado to establish the structure and layout of the main pages before development.
-
-
 ## AI Assistance
 
 Generative AI tools, including ChatGPT by OpenAI, were used during development for guidance, troubleshooting, code explanation, debugging support and assistance with project documentation.
@@ -391,13 +486,363 @@ All final implementation decisions, testing and project submission remain the re
 
 ## Deployment
 
-The Boutique Ado application is deployed using Render.
+The Boutique ADO application is deployed using Render and is connected directly to the project's GitHub repository.
 
-Live site:
+The production version of the application is available at:
 
-https://boutique-ado-v1-l5w5.onrender.com
+https://boutique-ado-v1-l5w5.onrender.com/
 
-The project is connected to the GitHub repository and Render automatically deploys changes pushed to the main branch.
+Render automatically redeploys the application when new changes are pushed to the `main` branch of the GitHub repository.
+
+### Deployment Configuration
+
+The following production configuration is used:
+
+- Hosting platform: Render
+- Source control: GitHub
+- Deployment branch: `main`
+- Runtime: Python
+- Web server: Gunicorn
+- Static file handling: WhiteNoise
+- Database configuration: supplied through the `DATABASE_URL` environment variable
+- Sensitive configuration values are stored as Render environment variables rather than committed to GitHub
+- `DEBUG` is disabled in production
+
+The Render build command is:
+
+`pip install -r requirements.txt && python manage.py collectstatic --noinput`
+
+The Render start command is:
+
+`gunicorn boutique_ado.wsgi`
+
+### Deployment Steps
+
+The following process was used to deploy the project:
+
+1. The completed project was pushed to the GitHub repository.
+
+2. A new Web Service was created in Render.
+
+3. The Boutique ADO GitHub repository was connected to the Render service.
+
+4. The `main` branch was selected as the production deployment branch.
+
+5. The Python environment and dependencies were defined through the project's `requirements.txt` file.
+
+6. The following build command was configured in Render:
+
+   `pip install -r requirements.txt && python manage.py collectstatic --noinput`
+
+   This installs the required Python packages and gathers the application's static files for production.
+
+7. The following start command was configured:
+
+   `gunicorn boutique_ado.wsgi`
+
+   Gunicorn is used to run the Django application in the production environment.
+
+8. Required environment variables were added through Render's Environment settings rather than stored directly in the source code.
+
+   These include:
+
+   - `SECRET_KEY`
+   - `DEBUG`
+   - `DATABASE_URL`
+   - `EMAIL_HOST_USER`
+   - `EMAIL_HOST_PASSWORD`
+
+9. Production security settings were configured so that sensitive information is not committed to GitHub and `DEBUG` is disabled on the deployed application.
+
+10. Static files were configured using WhiteNoise. Custom homepage images are stored within the application's static directory.
+
+11. Product image uploads use the project's media configuration and the `media/products/` directory.
+
+12. Gmail SMTP was configured for django-allauth account verification. Gmail credentials are supplied securely using Render environment variables.
+
+13. The Render service was redeployed after the email environment variables were added.
+
+14. The deployed application was then tested using the live Render URL.
+
+### Post-Deployment Testing
+
+After deployment, the live application was tested to confirm that:
+
+- the home page loads correctly;
+- product images and static assets display;
+- the Products page loads;
+- category filtering works;
+- a new user can register;
+- an account verification email is sent successfully through Gmail SMTP;
+- the verification link confirms the user's email address;
+- a verified user can log in and log out;
+- products can be created;
+- product information can be viewed;
+- existing products can be edited;
+- products can be deleted;
+- database changes are reflected in the deployed application.
+
+The live deployment was therefore tested against the same core functionality used during development.
+
+### Detailed Functional Testing
+
+The live deployed application was manually tested after the assessor feedback corrections. Testing focused on the areas that could not previously be assessed because account registration and email verification were not functioning correctly.
+
+#### User Registration
+
+A completely new user account was created through the live Render application.
+
+The registration form was tested with:
+
+- a unique username;
+- a valid email address;
+- matching email confirmation;
+- matching passwords.
+
+The application successfully created the account and moved the user to the email verification stage.
+
+#### Email Verification
+
+The project originally used Django's console email backend, which meant verification emails were printed in the terminal rather than delivered to the user.
+
+The project was changed to use Gmail SMTP.
+
+A real verification email was successfully delivered to the test email address.
+
+The email contained a confirmation link pointing back to the live Boutique ADO Render deployment.
+
+The confirmation link was opened and the email address was successfully verified.
+
+This confirms that the complete authentication flow now works:
+
+`Register → Receive email → Confirm email → Login`
+
+#### Login and Logout
+
+After confirming the email address, the newly created test user successfully logged in to the deployed application.
+
+The navigation changed appropriately for an authenticated user and displayed account-related functionality.
+
+Logout was also tested and successfully ended the authenticated session.
+
+### Database Testing
+
+Database functionality was tested through the deployed frontend rather than only through the Django admin or terminal.
+
+The Products page successfully retrieved existing records from the database and displayed:
+
+- product names;
+- descriptions;
+- prices;
+- categories;
+- product images.
+
+A temporary product was then used to test database writes and updates.
+
+### CRUD Testing
+
+All four CRUD operations were tested on the live application.
+
+#### Create
+
+A temporary product named `Test Product` was created using the Add Product form.
+
+The form included:
+
+- product name;
+- description;
+- price;
+- category;
+- image.
+
+After submission, the product was successfully saved and displayed in the product catalogue.
+
+**Result: Pass**
+
+#### Read
+
+The newly created product was opened from the Products page.
+
+Its name, description and price were displayed on the product detail page.
+
+**Result: Pass**
+
+#### Update
+
+The test product was edited.
+
+Its price was changed from:
+
+`£19.99`
+
+to:
+
+`£24.99`
+
+After saving, the new price appeared on the product detail page.
+
+This confirmed that changes were successfully written to the database.
+
+**Result: Pass**
+
+#### Delete
+
+The temporary product was deleted using the Delete Product functionality.
+
+After confirmation, the product was removed from the catalogue.
+
+**Result: Pass**
+
+### CRUD Test Summary
+
+| Operation | Expected Result | Actual Result | Status |
+| --- | --- | --- | --- |
+| Create | New product is stored in the database | Product created and displayed | Pass |
+| Read | Product information can be viewed | Product detail page displayed correctly | Pass |
+| Update | Changes are saved to the product | Price changed from £19.99 to £24.99 | Pass |
+| Delete | Product is removed | Test product deleted successfully | Pass |
+
+### Product Catalogue Testing
+
+The Products page was tested on the deployed website.
+
+The following were checked:
+
+- all product cards display;
+- product names display correctly;
+- prices display correctly;
+- images display;
+- product links open the correct detail page;
+- category navigation works;
+- authenticated users can access product management functionality.
+
+### Static File Testing
+
+Static homepage product images were reorganised into:
+
+`home/static/images/products/`
+
+The homepage template was updated so these images use Django's static file system.
+
+Django's `findstatic` command was used to test the configuration.
+
+Example command:
+
+`python manage.py findstatic images/products/floral-summer-dress.jpg`
+
+Django successfully located the file inside the application's static directory.
+
+### Media Testing
+
+Images uploaded through the Add Product form were tested separately from static images.
+
+Uploaded product files use:
+
+`media/products/`
+
+During live testing, a media-display problem was identified on the deployed product-detail page.
+
+The media routing configuration was corrected and the Django project was checked again after the change.
+
+### Code Quality Testing
+
+Python code was checked using `pycodestyle`.
+
+Command used:
+
+`python -m pycodestyle . --exclude=.venv,migrations,staticfiles`
+
+Several formatting issues were initially identified, including:
+
+- missing newlines;
+- long lines;
+- incorrect blank-line spacing;
+- indentation issues.
+
+These were corrected.
+
+The final `pycodestyle` run returned no errors or warnings.
+
+### Django System Check
+
+The project configuration was checked using:
+
+`python manage.py check`
+
+Final result:
+
+`System check identified no issues (0 silenced).`
+
+This check was repeated after the static-file, email and media changes to ensure the fixes had not introduced Django configuration errors.
+
+### Responsive and Usability Testing
+
+The site was manually reviewed at different browser widths.
+
+The following areas were checked:
+
+- navigation remains accessible;
+- text remains readable;
+- product cards remain usable;
+- product forms remain accessible;
+- buttons do not overlap;
+- authentication forms remain usable;
+- product details remain readable.
+
+Testing included mobile-sized, tablet-sized and desktop-sized browser widths.
+
+### Error Identification and Resolution
+
+Testing was also used to identify problems rather than only confirm successful behaviour.
+
+Issues found during the reassessment work included:
+
+1. Verification emails were being sent to the Django console instead of real email addresses.
+2. Render's free web-service tier prevented the Gmail SMTP connection.
+3. Homepage images were being treated as media rather than correctly organised static assets.
+4. A newly uploaded product image did not initially display correctly on the deployed product-detail page.
+5. Python files contained PEP8 formatting issues.
+
+Each of these issues was investigated and corrected before the final version was tested again.
+
+### Final Live Application Testing
+
+After all corrections were deployed, the live application was tested again to confirm:
+
+- registration works;
+- verification email is delivered;
+- email confirmation works;
+- login works;
+- logout works;
+- Products page works;
+- category navigation works;
+- Create works;
+- Read works;
+- Update works;
+- Delete works;
+- database records update correctly;
+- Django system checks pass;
+- Python code passes PEP8 validation.
+
+The final testing therefore covers the functionality that the assessor was previously unable to test because of the original signup problem.
+
+### Automatic Deployment
+
+The Render service is linked to the GitHub repository. Changes pushed to the `main` branch automatically trigger a new deployment.
+
+This allows fixes and updates to be published without manually uploading files to the production server.
+
+### Environment Variables and Security
+
+Sensitive values are not hard-coded into the project.
+
+The Django settings file retrieves sensitive configuration using environment variables, for example:
+
+`os.environ.get('SECRET_KEY')`
+
+The Gmail username and App Password are also stored as environment variables and are not included in the GitHub repository.
+
+This keeps production credentials separate from the source code.
 
 ### Deployment configuration
 
@@ -412,3 +857,30 @@ The project is connected to the GitHub repository and Render automatically deplo
 
 - Static files are handled using WhiteNoise.
 - Environment variables are configured securely in Render.
+
+### Deployment Steps
+
+1. Push the completed project to the GitHub repository.
+2. Sign in to Render and create a new Web Service.
+3. Connect the Boutique ADO GitHub repository.
+4. Select the `main` branch for deployment.
+5. Set the build command to:
+
+   `pip install -r requirements.txt && python manage.py collectstatic --noinput`
+
+6. Set the start command to:
+
+   `gunicorn boutique_ado.wsgi`
+
+7. Add the required environment variables in Render, including:
+   - `SECRET_KEY`
+   - `DEBUG`
+   - `DATABASE_URL`
+   - `EMAIL_HOST_USER`
+   - `EMAIL_HOST_PASSWORD`
+
+8. Ensure production security settings are configured and `DEBUG` is disabled.
+9. Save the configuration and deploy the web service.
+10. After deployment, test the live application, including registration, email verification, login, product display and CRUD functionality.
+
+The live application is deployed on Render and automatically redeploys when changes are pushed to the `main` branch.
