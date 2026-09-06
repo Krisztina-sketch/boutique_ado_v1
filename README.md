@@ -274,6 +274,32 @@ The deployed version was checked for:
 
 The live deployment matched the expected development functionality.
 
+### HTML and CSS Validation
+
+The deployed application was validated using the official W3C validation tools.
+
+#### HTML
+
+The live homepage was checked using the W3C Nu HTML Checker.
+
+Initial validation identified heading hierarchy issues caused by `<h5>` elements skipping heading levels. These headings were corrected to use appropriate `<h2>` and `<h3>` elements while retaining the existing visual styling.
+
+Final result:
+
+**Document checking completed. No errors or warnings to show.**
+
+#### CSS
+
+The deployed stylesheet was checked using the W3C CSS Validation Service:
+
+`/static/css/style.css`
+
+Final result:
+
+**Congratulations! No Error Found.**
+
+This confirms that the final deployed HTML and CSS pass W3C validation.
+
 ## Features and Screenshots
 
 ### Homepage
