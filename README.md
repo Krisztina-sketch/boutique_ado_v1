@@ -288,6 +288,8 @@ Final result:
 
 **Document checking completed. No errors or warnings to show.**
 
+![W3C HTML validation](docs/html-validation.png)
+
 #### CSS
 
 The deployed stylesheet was checked using the W3C CSS Validation Service:
@@ -297,6 +299,8 @@ The deployed stylesheet was checked using the W3C CSS Validation Service:
 Final result:
 
 **Congratulations! No Error Found.**
+
+![W3C CSS validation](docs/css-validation.png)
 
 This confirms that the final deployed HTML and CSS pass W3C validation.
 
